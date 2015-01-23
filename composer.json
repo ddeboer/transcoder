@@ -1,0 +1,31 @@
+{
+    "name": "ddeboer/transcoder",
+    "description": "Convert encodings",
+    "keywords": [ "encoding", "utf-8", "iso", "mb", "iconv", "multibyte" ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David de Boer",
+            "email": "david@ddeboer.nl"
+        },
+        {
+            "name": "Community contributors",
+            "homepage": "https://github.com/ddeboer/transcoder/graphs/contributors"
+        }   
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "suggest": {
+        "ext-mbstring": "For using mb functions"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ddeboer\\Transcoder\\": "src/",
+            "Ddeboer\\Transcoder\\Tests\\": "tests/"
+        }
+    }
+}
