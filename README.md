@@ -2,6 +2,7 @@ Transcoder
 ==========
 
 [![Build Status](https://travis-ci.org/ddeboer/transcoder.svg?branch=master)](https://travis-ci.org/ddeboer/transcoder)
+[![Release](https://img.shields.io/github/release/ddeboer/transcoder.svg?style=flat)](https://packagist.org/packages/ddeboer/transcoder)
 
 Introduction
 ------------
