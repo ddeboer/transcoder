@@ -4,6 +4,7 @@ namespace Ddeboer\Transcoder;
 
 use Ddeboer\Transcoder\Exception\ExtensionMissingException;
 use Ddeboer\Transcoder\Exception\IllegalCharacterException;
+use Ddeboer\Transcoder\Exception\UnsupportedEncodingException;
 
 class IconvTranscoder implements TranscoderInterface
 {
@@ -25,7 +26,11 @@ class IconvTranscoder implements TranscoderInterface
     {
         set_error_handler(
             function ($no, $message) use ($string) {
-                throw new IllegalCharacterException($string, $message);
+                if (1 === preg_match('/Wrong charset, conversion (.+) is/', $message, $matches)) {
+                    throw new UnsupportedEncodingException($matches[1], $message);
+                } else {
+                    throw new IllegalCharacterException($string, $message);
+                }
             },
             E_NOTICE | E_USER_NOTICE
         );

@@ -15,10 +15,19 @@ class IconvTranscoderTest extends \PHPUnit_Framework_TestCase
     {
         $this->transcoder = new IconvTranscoder();
     }
-
+    
+    /**
+     * @expectedException \Ddeboer\Transcoder\Exception\UnsupportedEncodingException
+     * @expectedExceptionMessage bad-encoding
+     */
+    public function testTranscodeUnsupportedFromEncoding()
+    {
+        $this->transcoder->transcode('bla', 'bad-encoding');
+    }
+    
     public function testDetectEncoding()
     {
-        $this->transcoder->transcode('España', "UTF-8", 'iso-8859-1');
+        $this->transcoder->transcode('España', null, 'iso-8859-1');
     }
 
     /**

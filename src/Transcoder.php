@@ -2,6 +2,7 @@
 
 namespace Ddeboer\Transcoder;
 
+use Ddeboer\Transcoder\Exception\ExtensionMissingException;
 use Ddeboer\Transcoder\Exception\UnsupportedEncodingException;
 
 class Transcoder implements TranscoderInterface
@@ -18,13 +19,16 @@ class Transcoder implements TranscoderInterface
         $this->transcoders = $transcoders;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function transcode($string, $from = null, $to = null)
     {
         foreach ($this->transcoders as $transcoder) {
             try {
                 return $transcoder->transcode($string, $from, $to);
             } catch (UnsupportedEncodingException $e) {
-                
+                // Ignore as long as the fallback transcoder is all right
             }
         }
         
@@ -51,12 +55,13 @@ class Transcoder implements TranscoderInterface
         try {
             $transcoders[] = new MbTranscoder($defaultEncoding);
         } catch (ExtensionMissingException $mb) {
-            // Ignore missing mbstring extension; fallback to iconv
+            // Ignore missing mbstring extension; fall back to iconv
         }
 
         try {
             $transcoders[] = new IconvTranscoder($defaultEncoding);
         } catch (ExtensionMissingException $iconv) {
+            // Neither mbstring nor iconv
             throw $iconv;
         }
         
