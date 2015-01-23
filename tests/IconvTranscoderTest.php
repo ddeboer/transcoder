@@ -35,7 +35,7 @@ class IconvTranscoderTest extends \PHPUnit_Framework_TestCase
     public function testTranscode($string, $encoding)
     {
         $result = $this->transcoder->transcode($string, null, $encoding);
-        $this->transcoder->transcode($result, $encoding);
+        $this->assertEquals($string, $this->transcoder->transcode($result, $encoding));
     }
     
     public function getStrings()
