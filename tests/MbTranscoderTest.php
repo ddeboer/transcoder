@@ -46,7 +46,11 @@ class MbTranscoderTest extends \PHPUnit_Framework_TestCase
      */
     public function testUndetectableEncoding()
     {
-        $result = $this->transcoder->transcode('‘España’', null, 'windows-1252');
+        $result = $this->transcoder->transcode(
+            '‘curly quotes make this incompatible with 1252’',
+            null,
+            'windows-1252'
+        );
         $this->transcoder->transcode($result);
     }
 
@@ -63,7 +67,7 @@ class MbTranscoderTest extends \PHPUnit_Framework_TestCase
     {
         return [
             ['‘España’', 'windows-1252'],
-            ['España', 'iso-8859-1']
+            ['‘España', 'iso-8859-1']
         ];
     }
 }

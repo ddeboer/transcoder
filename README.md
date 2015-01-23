@@ -81,6 +81,39 @@ use Ddeboer\Transcoder\Transcoder;
 $transcoder->transcode('España', null, 'UTF-8'); 
 ```
 
+### Error handling
+
+PHP’s `mv_convert_encoding` and `iconv` are inconvenient to use because they 
+generate notices and warnings instead of proper exceptions. This library fixes
+that:
+
+
+```php
+use Ddeboer\Transcoder\Exception\UndetectableEncodingException;
+use Ddeboer\Transcoder\Exception\UnsupportedEncodingException;
+use Ddeboer\Transcoder\Exception\IllegalCharacterException;
+
+$input = 'España';
+ 
+try {
+    $transcoder->transcode($input);
+} catch (UndetectableEncodingException $e) {
+    // Failed to automatically detect $input’s encoding 
+}
+
+try {
+    $transcoder->transcode($input, null, 'not-a-real-encoding');
+} catch (UnsupportedEncodingException $e) {
+    // ‘not-a-real-encoding’ is an unsupported encoding 
+}
+
+try {
+    $transcoder->transcode('Illegal quotes: ‘ ’', null, 'iso-8859-1');
+} catch (IllegalCharacterException $e) {
+    // Curly quotes ‘ ’ are illegal in ISO-8859-1
+}
+```
+
 ### Transcoder fallback
 
 In general, `mb_convert_encoding` is faster than `iconv`. However, as `iconv`
