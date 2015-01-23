@@ -7,7 +7,7 @@ Introduction
 This is a wrapper around PHP’s `mb_convert_encoding` and `iconv` functions.
 This library adds:
 
-* fallback from `mb` to `iconv` for unknown exceptions
+* fallback from `mb` to `iconv` for unknown encodings
 * conversion of warnings to proper exceptions.
 
 Installation
@@ -48,13 +48,6 @@ Or:
 use Ddeboer\Transcoder\IconvTranscoder;
 
 $transcoder = new IconvTranscoder();
-```
-
-Then transcode some strings:
-
-```php 
-$transcoder->transcode('España');
-
 ```
 
 ### Source encoding
