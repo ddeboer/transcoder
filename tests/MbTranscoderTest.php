@@ -67,7 +67,7 @@ class MbTranscoderTest extends \PHPUnit_Framework_TestCase
     {
         return [
             ['‘España’', 'windows-1252'],
-            ['‘España', 'iso-8859-1']
+            ['España', 'iso-8859-1']
         ];
     }
 }
