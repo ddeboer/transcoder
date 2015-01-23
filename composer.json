@@ -1,7 +1,7 @@
 {
     "name": "ddeboer/transcoder",
     "description": "Convert encodings",
-    "keywords": [ "encoding", "utf-8", "iso", "mb", "iconv", "multibyte" ],
+    "keywords": [ "encoding", "utf-8", "iso", "mb", "iconv", "multibyte", "charset" ],
     "license": "MIT",
     "authors": [
         {
