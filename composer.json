@@ -20,7 +20,8 @@
         "phpunit/phpunit": "~4.0"
     },
     "suggest": {
-        "ext-mbstring": "For using mb functions"
+        "ext-mbstring": "For using the MbTranscoder",
+        "ext-iconv": "For using the IconvTranscoder"
     },
     "autoload": {
         "psr-4": {
