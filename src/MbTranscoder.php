@@ -42,9 +42,12 @@ class MbTranscoder implements TranscoderInterface
         }
 
         if (!$from || 'auto' === $from) {
-            set_error_handler(function($no, $warning) use ($string) {
-                throw new UndetectableEncodingException($string, $warning);
-            }, E_WARNING);
+            set_error_handler(
+                function ($no, $warning) use ($string) {
+                    throw new UndetectableEncodingException($string, $warning);
+                },
+                E_WARNING
+            );
         }
 
         
@@ -58,7 +61,7 @@ class MbTranscoder implements TranscoderInterface
             $from ?: 'auto'
         );
         
-        restore_error_handler(E_WARNING);
+        restore_error_handler();
         
         return $result;
     }
