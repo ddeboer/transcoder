@@ -1,7 +1,7 @@
 {
     "name": "ddeboer/transcoder",
     "description": "Better encoding conversion for PHP",
-    "keywords": [ "encoding", "utf-8", "iso", "mb", "iconv", "multibyte", "charset" ],
+    "keywords": [ "encoding", "utf-8", "iso", "mb", "iconv", "multibyte", "charset", "mb_convert_encoding" ],
     "license": "MIT",
     "authors": [
         {
