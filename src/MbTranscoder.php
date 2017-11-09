@@ -9,7 +9,6 @@ use Ddeboer\Transcoder\Exception\UnsupportedEncodingException;
 class MbTranscoder implements TranscoderInterface
 {
     private static $encodings;
-    private static $aliases;
     private $defaultEncoding;
     
     public function __construct($defaultEncoding = 'UTF-8')
