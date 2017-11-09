@@ -9,6 +9,7 @@ use Ddeboer\Transcoder\Exception\UnsupportedEncodingException;
 class MbTranscoder implements TranscoderInterface
 {
     private static $encodings;
+    private static $aliases;
     private $defaultEncoding;
     
     public function __construct($defaultEncoding = 'UTF-8')
@@ -18,8 +19,18 @@ class MbTranscoder implements TranscoderInterface
         }
         
         if (null === self::$encodings) {
+            $encodings = mb_list_encodings();
+            $aliases = call_user_func_array(
+                "array_merge",
+                array_map(
+                    'mb_encoding_aliases',
+                    $encodings
+                )
+            );
+            $encodingsAndAliases = array_merge($encodings, $aliases);
+            
             self::$encodings = array_change_key_case(
-                array_flip(mb_list_encodings()),
+                array_flip($encodingsAndAliases),
                 CASE_LOWER
             );
         }
