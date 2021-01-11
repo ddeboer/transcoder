@@ -4,33 +4,32 @@ namespace Ddeboer\Transcoder\Tests;
 
 use Ddeboer\Transcoder\MbTranscoder;
 
-class MbTranscoderTest extends \PHPUnit_Framework_TestCase
+class MbTranscoderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var MbTranscoder
      */
     private $transcoder;
     
-    protected function setUp()
+    /**
+     * @before
+     */
+    protected function doSetUp()
     {
         $this->transcoder = new MbTranscoder();
     }
 
-    /**
-     * @expectedException \Ddeboer\Transcoder\Exception\UnsupportedEncodingException
-     * @expectedExceptionMessage bad-encoding
-     */
     public function testTranscodeUnsupportedFromEncoding()
     {
+        $this->expectException(\Ddeboer\Transcoder\Exception\UnsupportedEncodingException::class);
+        $this->expectExceptionMessage('bad-encoding');
         $this->transcoder->transcode('bla', 'bad-encoding');
     }
 
-    /**
-     * @expectedException \Ddeboer\Transcoder\Exception\UnsupportedEncodingException
-     * @expectedExceptionMessage bad-encoding
-     */
     public function testTranscodeUnsupportedToEncoding()
     {
+        $this->expectException(\Ddeboer\Transcoder\Exception\UnsupportedEncodingException::class);
+        $this->expectExceptionMessage('bad-encoding');
         $this->transcoder->transcode('bla', null, 'bad-encoding');
     }
     
@@ -40,12 +39,10 @@ class MbTranscoderTest extends \PHPUnit_Framework_TestCase
         $this->transcoder->transcode($result);
     }
     
-    /**
-     * @expectedException \Ddeboer\Transcoder\Exception\UndetectableEncodingException
-     * @expectedExceptionMessage is undetectable 
-     */
     public function testUndetectableEncoding()
     {
+        $this->expectException(\Ddeboer\Transcoder\Exception\UndetectableEncodingException::class);
+        $this->expectExceptionMessage('is undetectable');
         $result = $this->transcoder->transcode(
             '‘curly quotes make this incompatible with 1252’',
             null,
