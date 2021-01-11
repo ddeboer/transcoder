@@ -4,7 +4,7 @@
         convertErrorsToExceptions="false"
         >
     <testsuites>
-        <testsuite>
+        <testsuite name="Tests">
             <directory suffix="Test.php">./tests/</directory>
         </testsuite>
     </testsuites>
