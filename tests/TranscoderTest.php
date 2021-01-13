@@ -4,14 +4,17 @@ namespace Ddeboer\Transcoder\Tests;
 
 use Ddeboer\Transcoder\Transcoder;
 
-class TranscoderTest extends \PHPUnit_Framework_TestCase
+class TranscoderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Transcoder
      */
     private $transcoder;
     
-    protected function setUp()
+    /**
+     * @before
+     */
+    protected function doSetUp()
     {
         $this->transcoder = Transcoder::create();
     }
