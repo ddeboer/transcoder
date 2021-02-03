@@ -41,7 +41,12 @@ class MbTranscoder implements TranscoderInterface
             }
         }
 
-        if (!$from || 'auto' === $from) {
+        if ($to) {
+            $this->assertSupported($to);
+        }
+
+        $handleErrors = !$from || 'auto' === $from;
+        if ($handleErrors) {
             set_error_handler(
                 function ($no, $warning) use ($string) {
                     throw new UndetectableEncodingException($string, $warning);
@@ -50,19 +55,18 @@ class MbTranscoder implements TranscoderInterface
             );
         }
 
-        
-        if ($to) {
-            $this->assertSupported($to);
+        try {
+            $result = mb_convert_encoding(
+                $string,
+                $to ?: $this->defaultEncoding,
+                $from ?: 'auto'
+            );
+        } finally {
+            if ($handleErrors) {
+                restore_error_handler();
+            }
         }
-        
-        $result = mb_convert_encoding(
-            $string,
-            $to ?: $this->defaultEncoding,
-            $from ?: 'auto'
-        );
-        
-        restore_error_handler();
-        
+
         return $result;
     }
     

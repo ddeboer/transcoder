@@ -34,10 +34,13 @@ class IconvTranscoder implements TranscoderInterface
             },
             E_NOTICE | E_USER_NOTICE
         );
-        
-        $result = iconv($from, $to ?: $this->defaultEncoding, $string);
-        restore_error_handler();
-        
+
+        try {
+            $result = iconv($from, $to ?: $this->defaultEncoding, $string);
+        } finally {
+            restore_error_handler();
+        }
+
         return $result;
     }
 }
